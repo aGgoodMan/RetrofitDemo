@@ -1,0 +1,35 @@
+﻿1.Retrofit基本使用步骤：
+1>创建对象():建造者模式
+   具体说明：<1>.创建Retrofit.Builder buidler = Retrofit.Builder()
+           <2>.配置Buidler:
+              1》baseUrl(""):地址必须以／结尾，例如：http://主机名/
+              2》addConverterFactory():添加解析类的工厂，例如：
+             gson解析： com.squareup.retrofit2:converter-gson
+             xml解析：com.squareup.retrofit2:converter-simplexml
+           <3>.创建Retrofit = builder.build()
+2>创建请求：请求是一个接口服务apiService:但是请求方式和请求参数以及请求头，请求体用注解表示，
+    例如：
+    1.get
+    示例1:
+      @GET(value = "基本地址剩余的部分，而且该地址一开始写好后续不再动态改变")
+      Call<ResponseBody> getListData();
+    示例2:
+       url地址中的内容可能要动态改变@Path替换地址的内容
+       @GET(value = "json/0/{page}")
+       Call<ResponseBody> getData(@Path("page") int page);
+    2.pos
+    示例1:
+    //请求头
+     @Headers({"Content-Type:application/json; charset=UTF-8"})
+     //请求地址(value = "基本地址剩余的部分，而且该地址一开始写好后续不再动态改变")
+     @POST(value = "v1/item/pop") @Query:动态修改请求体的内容；
+     Call<HotData> getHotListData(@Query("pageSize") int pageSize, @Query("page") int page);
+
+备注：
+   利用retrofit的create()创建请求：   T t = retrofit.create(T.class); T 表示请求的接口服务的地址
+
+3>通过接口中的方法把请求转换成任务Call，例如：  //用接口以及注解把请求转换成任务getInfoListData表示接口中方法
+                                  Call<Info> call = T.getInfoListData();
+
+4>异步执行任务：call.enqueue(Callback callback),但是在该回调中可以直接更新UI,请求得到的接口使用变量或者对象存储供后续使用
+

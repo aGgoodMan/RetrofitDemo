@@ -1,0 +1,20 @@
+
+//测试get请求方式,不包含请求头
+福利社：http://m2.qiushibaike.com/article/list/text
+请求方式：GET
+请求体：page=1
+请求头：无
+
+
+//测试@QueryMap
+QQ空间：http://qzone-music.qq.com/fcg-bin/fcg_music_fav_getinfo.fcg
+请求方式：GET
+请求体：dirinfo=0&dirid=1&uin=QQ号&p=0.519638272547262&g_tk=1284234856
+请求头：无
+
+
+//测试Post请求方式,包含请求头
+福利社：http://api.menghuoapp.com/v1/welfare_good/list
+请求方式：POST
+请求体：page_size=20，page=0
+请求头：名称：Content-Type，值：application/json; charset=UTF-8
